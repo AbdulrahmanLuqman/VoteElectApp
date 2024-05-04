@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSwipeable } from "react-swipeable";
 
 const Onboarding = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [dragStartX, setDragStartX] = useState(0);
   const slides = [
     {
       image: "/flower1.jpg",
@@ -79,6 +81,28 @@ const Onboarding = () => {
     },
   ];
 
+  const handlers = useSwipeable({
+    onSwipedLeft: () => nextSlide(),
+    onSwipedRight: () => prevSlide(),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
+
+  const handleDragStart = (event) => {
+    setDragStartX(event.clientX);
+  };
+
+  const handleDragEnd = (event) => {
+    const dragEndX = event.clientX;
+    const deltaX = dragEndX - dragStartX;
+
+    if (deltaX > 50) {
+      prevSlide();
+    } else if (deltaX < -50) {
+      nextSlide();
+    }
+  };
+
   const nextSlide = () => {
     currentIndex < slides.length - 1
       ? setCurrentIndex((prevIndex) => prevIndex + 1)
@@ -92,7 +116,13 @@ const Onboarding = () => {
   };
 
   return (
-    <div className=" flex flex-col items-center gap-8 justify-center bg-green-50  h-screen w-full">
+    <div
+      className=" flex flex-col items-center gap-8 justify-center bg-green-50  h-screen w-full"
+      draggable="true"
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      {...handlers}
+    >
       <div
         className={`absolute top-8 text-green-500 right-8 ${
           currentIndex === 4 ? "hidden" : "block"
@@ -103,9 +133,9 @@ const Onboarding = () => {
       </div>
       <div className="relative">
         <div className="flex items-center ">
-          <div className=" text-4xl cursor-pointer" onClick={prevSlide}>
+          {/* <div className=" text-4xl cursor-pointer" onClick={prevSlide}>
             {"<"}
-          </div>
+          </div> */}
           <div className="w-[300px] sm:w-[500px]">
             <img
               src={slides[currentIndex].image}
@@ -113,9 +143,9 @@ const Onboarding = () => {
               className="w-full h-[300px] rounded-lg transition duration-500"
             />
           </div>
-          <div className=" text-4xl cursor-pointer" onClick={nextSlide}>
+          {/* <div className=" text-4xl cursor-pointer" onClick={nextSlide}>
             {">"}
-          </div>
+          </div> */}
         </div>
         {/* <div className="absolute bottom-0 left-0 right-0 flex justify-center mt-4"> */}
         <div className=" flex items-center justify-center mt-4">
