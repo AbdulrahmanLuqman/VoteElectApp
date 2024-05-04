@@ -66,11 +66,11 @@ const Onboarding = () => {
             </div>
             <div className="w-full mt-8 flex flex-col items-center">
               <button className="w-full bg-green-500 py-2 font-bold text-white rounded-lg">
-                Create account
+                <Link to="/signup">Create account</Link>
               </button>
               <h1 className=" mt-8">
                 Already have an account?
-                <Link className="text-green-400" to="/login">
+                <Link className="text-green-400" to="/signin">
                   Log in
                 </Link>
               </h1>
