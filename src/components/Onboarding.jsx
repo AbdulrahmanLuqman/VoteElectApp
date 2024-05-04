@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSwipeable } from "react-swipeable";
 
 const Onboarding = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [dragStartX, setDragStartX] = useState(0);
   const slides = [
     {
       image: "/flower1.jpg",
@@ -55,16 +57,16 @@ const Onboarding = () => {
       content: (
         <>
           <div className="flex flex-col items-center px-8">
-            <div className="mb-4">
-              <h1>Monitor the Process</h1>
+            <div className="mb-4 flex flex-col items-center">
+              <h1 className=" font-bold text-2xl">See live Election results</h1>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Laboriosam, soluta?
               </p>
             </div>
-            <div className="w-full mt-8">
-              <button className="w-full bg-green-500 py-2 text-white rounded-lg">
-                Create an account
+            <div className="w-full mt-8 flex flex-col items-center">
+              <button className="w-full bg-green-500 py-2 font-bold text-white rounded-lg">
+                Create account
               </button>
               <h1 className=" mt-8">
                 Already have an account?
@@ -79,36 +81,71 @@ const Onboarding = () => {
     },
   ];
 
-  const nextSlide = () => {
-    if (currentIndex < slides.length - 1) {
-      setCurrentIndex((prevIndex) => prevIndex + 1);
-    } else {
-      // Handle last slide
-      console.log("Last slide reached. You can navigate to signup page.");
+  const handlers = useSwipeable({
+    onSwipedLeft: () => nextSlide(),
+    onSwipedRight: () => prevSlide(),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
+
+  const handleDragStart = (event) => {
+    setDragStartX(event.clientX);
+  };
+
+  const handleDragEnd = (event) => {
+    const dragEndX = event.clientX;
+    const deltaX = dragEndX - dragStartX;
+
+    if (deltaX > 50) {
+      prevSlide();
+    } else if (deltaX < -50) {
+      nextSlide();
     }
   };
 
+  const nextSlide = () => {
+    currentIndex < slides.length - 1
+      ? setCurrentIndex((prevIndex) => prevIndex + 1)
+      : null;
+  };
+
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => prevIndex - 1);
+    currentIndex
+      ? setCurrentIndex((prevIndex) => prevIndex - 1)
+      : setCurrentIndex(0);
   };
 
   return (
-    <div className=" flex flex-col items-center gap-8 justify-center bg-green-100 h-screen w-full">
+    <div
+      className=" flex flex-col items-center gap-8 justify-center bg-green-50  h-screen w-full"
+      draggable="true"
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      {...handlers}
+    >
+      <div
+        className={`absolute top-8 text-green-500 right-8 ${
+          currentIndex === 4 ? "hidden" : "block"
+        }`}
+        onClick={() => setCurrentIndex(4)}
+      >
+        Skip
+      </div>
       <div className="relative">
         <div className="flex items-center ">
-          <div className="left" onClick={prevSlide}>
-            L
-          </div>
+          {/* <div className=" text-4xl cursor-pointer" onClick={prevSlide}>
+            {"<"}
+          </div> */}
           <div className="w-[300px] sm:w-[500px]">
             <img
               src={slides[currentIndex].image}
               alt=""
-              className="w-full h-[200px] rounded-lg"
+              className="w-full h-[300px] rounded-lg transition duration-500"
             />
           </div>
-          <div className="right" onClick={nextSlide}>
-            R
-          </div>
+          {/* <div className=" text-4xl cursor-pointer" onClick={nextSlide}>
+            {">"}
+          </div> */}
         </div>
         {/* <div className="absolute bottom-0 left-0 right-0 flex justify-center mt-4"> */}
         <div className=" flex items-center justify-center mt-4">
