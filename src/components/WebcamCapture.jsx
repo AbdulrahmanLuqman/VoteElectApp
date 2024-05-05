@@ -23,7 +23,9 @@ const WebcamCapture = () => {
           facingMode: "user",
         }}
       />
-      <button onClick={capture}>Capture photo</button>
+      <button className=" bg-Green rounded-md px-1 py-1" onClick={capture}>
+        Capture photo
+      </button>
       {imgSrc && <img src={imgSrc} alt="Captured" />}
     </>
   );
