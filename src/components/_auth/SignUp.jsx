@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from "react";
 import flag from "../../assets/images/flag.png"
 import { data } from "autoprefixer";
+import {useNavigate} from "react-router-dom"
 
 const SignUp = () => {
+  const navigate = useNavigate()
 
   const initialValues = {
     lastName: "",
@@ -28,6 +30,7 @@ const SignUp = () => {
       setError("All fields are required")
     }else{
       setError("")
+      navigate("/signin")
     }
   }
 
