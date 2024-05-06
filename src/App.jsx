@@ -3,6 +3,7 @@ import Onboarding from "./components/Onboarding";
 import SignUp from "./components/_auth/SignUp";
 import SignIn from "./components/_auth/SignIn";
 import Home from "./components/Home";
+import WebcamCapture from "./components/WebcamCapture";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/home" element={<Home />} />
+      <Route path="/webcam-capture" element={<WebcamCapture />} />
     </Routes>
   );
 }

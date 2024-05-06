@@ -35,7 +35,6 @@ const Home = () => {
         <IoMdNotifications className=" text-white text-3xl " />
       </div>
       {/*  */}
-      <WebcamCapture />
     </div>
   );
 };
