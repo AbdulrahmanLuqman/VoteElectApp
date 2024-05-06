@@ -31,7 +31,8 @@ const SignIn = () => {
     } else {
       setError("");
       navigate("/dashboard");
-  }
+    }
+    }
 
   return (
     <div className="flex justify-center w-full px-10 py-4">
@@ -98,4 +99,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignIn
