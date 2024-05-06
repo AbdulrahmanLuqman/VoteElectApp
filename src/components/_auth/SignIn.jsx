@@ -29,7 +29,7 @@ const SignIn = () => {
       setError("All fields are required")
     }else{
       setError("")
-      navigate("/homepage")
+      navigate("/dashboard")
     }
   }
 
@@ -37,7 +37,7 @@ const SignIn = () => {
     <div className="flex justify-center w-full px-10 py-4">
     {/* <pre>{JSON.stringify(formData, undefined, 5)}</pre> */}
     <form onSubmit={handleSubmit} action="" className="flex flex-col items-center max-[500px]:block w-full space-y-6">
-      <h1 className="text-[1.5rem] font-black text-center">Sign Up</h1>
+      <h1 className="text-[1.5rem] font-black text-center">Sign In</h1>
 
       <div className="flex flex-col gap-2">
         <label htmlFor="last-name" className="font-bold">Last Name<span className="text-green-500">*</span></label>
