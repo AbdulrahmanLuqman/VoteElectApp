@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
 
 const Onboarding = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [dragStartX, setDragStartX] = useState(0);
+  const [autoSwitch, setAutoSwitch] = useState(true);
   const slides = [
     {
       image: "/flower1.jpg",
@@ -115,12 +116,32 @@ const Onboarding = () => {
       : setCurrentIndex(0);
   };
 
+  useEffect(() => {
+    if (autoSwitch) {
+      const intervalId = setInterval(() => {
+        nextSlide();
+      }, 2000);
+
+      return () => clearInterval(intervalId);
+    }
+  }, [currentIndex, autoSwitch]);
+
+  const handleMouseEnter = () => {
+    setAutoSwitch(false);
+  };
+
+  const handleMouseLeave = () => {
+    setAutoSwitch(true);
+  };
   return (
     <div
       className=" flex flex-col items-center gap-8 justify-center bg-green-50  h-screen w-full"
       draggable="true"
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
+      {...handlers}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       {...handlers}
     >
       <div
@@ -140,7 +161,7 @@ const Onboarding = () => {
             <img
               src={slides[currentIndex].image}
               alt=""
-              className="w-full h-[300px] rounded-lg transition duration-500"
+              className="w-full h-[300px] rounded-lg "
             />
           </div>
           {/* <div className=" text-4xl cursor-pointer" onClick={nextSlide}>
