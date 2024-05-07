@@ -31,11 +31,10 @@ const SignIn = () => {
       setError("");
       navigate("/dashboard");
     }
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
     }
-=======
+=========
   };
->>>>>>> 1479080285bcd1e73035cb8662a1c6c13eba78af
 
   return (
     <div className="flex justify-center w-full px-10 py-4">
