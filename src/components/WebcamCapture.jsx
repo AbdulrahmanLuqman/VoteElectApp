@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from "react";
 import Webcam from "react-webcam";
+import PropTypes from "prop-types";
 
 const WebcamCapture = ({ onCapture }) => {
   const webcamRef = useRef(null);
@@ -37,6 +38,9 @@ const WebcamCapture = ({ onCapture }) => {
       )}
     </>
   );
+};
+WebcamCapture.propTypes = {
+  onCapture: PropTypes.func.isRequired,
 };
 
 export default WebcamCapture;
