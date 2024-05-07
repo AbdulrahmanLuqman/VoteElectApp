@@ -3,22 +3,27 @@ import flag from "../../assets/images/flag.png";
 import { useNavigate } from "react-router-dom";
 import WebcamCapture from "../WebcamCapture";
 import Modal from "react-modal";
+import axios from "axios";
 Modal.setAppElement("#root");
 
 const SignUp = () => {
   const navigate = useNavigate();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [capturedImage, setCapturedImage] = useState(null);
-  const [imageSrc, setImageSrc] = useState(null);
-  const [imgSrc, setImgSrc] = useState(null);
+  const [imageSrc, setImageSrc] = useState("");
+  // const [imgSrc, setImgSrc] = useState(null);
 
   const [formData, setFormData] = useState({
-    lastName: "",
+    userName: "",
     firstName: "",
-    otherName: "",
-    dob: "",
-    state: "",
-    lga: "",
+    // otherName: "",
+    middleName: "",
+    lastName: "",
+    dateOfBirth: "",
+    // stateOfOrigin: "",
+    // localGovt: "",
+    faceRecognitionLabel: "",
+    capturedImages: [],
   });
   const [error, setError] = useState("");
   const [results, setResults] = useState([]);
@@ -63,28 +68,71 @@ const SignUp = () => {
 
   const handleSaveImage = () => {
     setImageSrc(capturedImage);
-    console.log("Captured Image:", imgSrc);
+    // console.log("Captured Image:", imgSrc);
+    console.log("captured img", capturedImage);
 
     closeModal();
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    console.log("Before update:", formData);
     setFormData({ ...formData, [name]: value });
+    if (name === "userName") {
+      generateFaceRecognitionId(value); 
+    }
+    console.log("After update:", formData);
   };
 
-  const handleSubmit = (e) => {
+  const generateFaceRecognitionId = (username) => {
+    const trimmedUsername = username.trim();
+    const randomNumber = Math.floor(10000 + Math.random() * 90000); 
+    const faceRecognitionId = trimmedUsername + randomNumber; 
+    setFormData((prevData) => ({
+      ...prevData,
+      faceRecognitionLabel: faceRecognitionId,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (
-      Object.values(formData).some((value) => value.trim() === "") ||
+      Object.values(formData).some(
+        (value) => typeof value === "string" && value.trim() === ""
+      ) ||
       !capturedImage
     ) {
       setError("All fields are required");
     } else {
       setError("");
-      const updatedFormData = { ...formData, capturedImage };
+      const updatedFormData = {
+        userName: formData.userName,
+        firstName: formData.firstName,
+        middleName: formData.middleName,
+        lastName: formData.lastName,
+        dateOfBirth: formData.dateOfBirth,
+        stateOfOrigin: formData.state,
+        localGovt: formData.lga,
+        faceRecognitionLabel: formData.faceRecognitionLabel,
+        capturedImages: [capturedImage, ...formData.capturedImages],
+      };
+
+      console.log("img", capturedImage);
+      console.log(formData);
       console.log(updatedFormData);
-      navigate("/signin");
+
+      try {
+       
+        const response = await axios.post(
+          "https://voteelect.onrender.com/api/v1/register",
+          updatedFormData
+        );
+        console.log("Response:", response.data);
+
+        navigate("/signin");
+      } catch (error) {
+        console.error("Error:", error);
+      }
     }
   };
 
@@ -163,17 +211,45 @@ const SignUp = () => {
 
         <div className="flex flex-col gap-2">
           <label htmlFor="other-name" className="font-bold">
-            Other Name<span>*</span>
+            Middle Name<span>*</span>
           </label>
           <input
             onChange={handleInputChange}
             id="other-name"
-            name="otherName"
-            value={formData.otherName}
+            name="middleName"
+            value={formData.middleName}
             type="text"
             className="w-[400px] max-[500px]:w-full border border-green-300 px-2 py-[1px] font-semibold outline-none rounded-md focus:border-green-700 focus:border-2"
           />
         </div>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="other-name" className="font-bold">
+            Username<span>*</span>
+          </label>
+          <input
+            onChange={handleInputChange}
+            id="other-name"
+            name="userName"
+            value={formData.userName}
+            type="text"
+            className="w-[400px] max-[500px]:w-full border border-green-300 px-2 py-[1px] font-semibold outline-none rounded-md focus:border-green-700 focus:border-2"
+          />
+        </div>
+        {/*  */}
+        <div className="flex flex-col gap-2">
+          <label htmlFor="other-name" className="font-bold">
+            Face ID<span>*</span>
+          </label>
+          <input
+            id="face-id"
+            name="faceRecognitionLabel"
+            value={formData.faceRecognitionLabel}
+            disabled
+            className="w-[400px] cursor-not-allowed max-[500px]:w-full border border-green-300 px-2 py-[1px] font-semibold outline-none rounded-md focus:border-green-700 focus:border-2"
+          />
+        </div>
+
+        {/*  */}
 
         <div className="flex flex-col gap-2">
           <label htmlFor="dob" className="font-bold">
@@ -183,7 +259,7 @@ const SignUp = () => {
             onChange={handleInputChange}
             id="dob"
             type="date"
-            name="dob"
+            name="dateOfBirth"
             value={formData.dob}
             className="w-[400px] max-[500px]:w-full border border-green-300 px-2 py-[1px] font-semibold outline-none rounded-md focus:border-green-700 focus:border-2"
           />
