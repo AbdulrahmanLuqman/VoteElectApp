@@ -16,7 +16,6 @@ const SignIn = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setFormData({ ...formData, [name]: value });
   };
 
@@ -31,11 +30,11 @@ const SignIn = () => {
     } else {
       setError("");
       navigate("/dashboard");
-  }
+    }
+  };
 
   return (
     <div className="flex justify-center w-full px-10 py-4">
-      {/* <pre>{JSON.stringify(formData, undefined, 5)}</pre> */}
       <form
         onSubmit={handleSubmit}
         action=""
