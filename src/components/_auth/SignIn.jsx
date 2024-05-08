@@ -16,7 +16,6 @@ const SignIn = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setFormData({ ...formData, [name]: value });
   };
 
@@ -30,13 +29,12 @@ const SignIn = () => {
       setError("All fields are required");
     } else {
       setError("");
-      navigate("/homepage");
+      navigate("/dashboard");
     }
   };
 
   return (
     <div className="flex justify-center w-full px-10 py-4">
-      {/* <pre>{JSON.stringify(formData, undefined, 5)}</pre> */}
       <form
         onSubmit={handleSubmit}
         action=""
@@ -96,8 +94,7 @@ const SignIn = () => {
       <img className="h-5 fixed right-10" src={flag} alt="flag" />
       <img className="h-5 fixed right-10 bottom-8" src={flag} alt="flag" />
     </div>
-    // >>>>>>> f48a8ed8900574ede54b81270d9a2f7c703ab1f6
   );
 };
 
-export default SignIn;
+export default SignIn
