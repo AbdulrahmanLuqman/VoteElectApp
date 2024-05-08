@@ -1,5 +1,5 @@
 // import Webcam from "react-webcam";
-import WebcamCapture from "./WebcamCapture";
+// import WebcamCapture from "./WebcamCapture";
 import { MdLocationPin } from "react-icons/md";
 import { IoMdNotifications } from "react-icons/io";
 
