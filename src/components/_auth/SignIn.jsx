@@ -29,7 +29,7 @@ const SignIn = () => {
       setError("All fields are required");
     } else {
       setError("");
-      navigate("/dashboard");
+      navigate("/home");
     }
   };
 
