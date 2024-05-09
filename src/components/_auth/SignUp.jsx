@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import WebcamCapture from "../WebcamCapture";
 import Modal from "react-modal";
 import axios from "axios";
+import { createUserAccount } from "../../lib/appwrite/api";
 Modal.setAppElement("#root");
 
 const SignUp = () => {
@@ -17,12 +18,13 @@ const SignUp = () => {
     userName: "",
     firstName: "",
     // otherName: "",
-    middleName: "",
+    // middleName: "",
+    email: "",
     lastName: "",
     dateOfBirth: "",
     // stateOfOrigin: "",
     // localGovt: "",
-    faceRecognitionLabel: "",
+    password: "",
     capturedImages: [],
   });
   const [error, setError] = useState("");
@@ -79,23 +81,85 @@ const SignUp = () => {
     console.log("Before update:", formData);
     setFormData({ ...formData, [name]: value });
     if (name === "userName") {
-      generateFaceRecognitionId(value); 
+      // generateFaceRecognitionId(value);
     }
     console.log("After update:", formData);
   };
 
-  const generateFaceRecognitionId = (username) => {
-    const trimmedUsername = username.trim();
-    const randomNumber = Math.floor(10000 + Math.random() * 90000); 
-    const faceRecognitionId = trimmedUsername + randomNumber; 
-    setFormData((prevData) => ({
-      ...prevData,
-      faceRecognitionLabel: faceRecognitionId,
-    }));
+  // const generateFaceRecognitionId = (username) => {
+  //   const trimmedUsername = username.trim();
+  //   const randomNumber = Math.floor(10000 + Math.random() * 90000);
+  //   const password = trimmedUsername + randomNumber;
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     password: password,
+  //   }));
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (
+  //     Object.values(formData).some(
+  //       (value) => typeof value === "string" && value.trim() === ""
+  //     ) ||
+  //     !capturedImage
+  //   ) {
+  //     setError("All fields are required");
+  //   } else {
+  //     setError("");
+  //     const updatedFormData = {
+  //       userName: formData.userName,
+  //       firstName: formData.firstName,
+  //       middleName: formData.middleName,
+  //       lastName: formData.lastName,
+  //       dateOfBirth: formData.dateOfBirth,
+  //       stateOfOrigin: formData.state,
+  //       localGovt: formData.lga,
+  //       faceRecognitionLabel: formData.faceRecognitionLabel,
+  //       capturedImages: [capturedImage, ...formData.capturedImages],
+  //     };
+
+  //     console.log("img", capturedImage);
+  //     console.log(formData);
+  //     console.log(updatedFormData);
+
+  //     try {
+  //       const response = await axios.post(
+  //         "https://voteelect.onrender.com/api/v1/register",
+  //         updatedFormData
+  //       );
+  //       console.log("Response:", response.data);
+
+  //       navigate("/signin");
+  //     } catch (error) {
+  //       console.error("Error:", error);
+  //     }
+  //   }
+  // };
+
+  // const handleSubmit = async (values, e) => {
+  //   e.preventDefault();
+  //   const newUser = await createUserAccount(values);
+
+  //   console.log(newUser);
+  // };
+
+  const isValidEmail = (email) => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
+
+    return emailPattern.test(email);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate the email format
+    if (!isValidEmail(formData.email)) {
+      setError("Invalid email address");
+      return; // Prevent form submission if email is invalid
+    }
+
+    // Check if all required fields are filled and a captured image exists
     if (
       Object.values(formData).some(
         (value) => typeof value === "string" && value.trim() === ""
@@ -105,32 +169,32 @@ const SignUp = () => {
       setError("All fields are required");
     } else {
       setError("");
-      const updatedFormData = {
-        userName: formData.userName,
-        firstName: formData.firstName,
-        middleName: formData.middleName,
-        lastName: formData.lastName,
-        dateOfBirth: formData.dateOfBirth,
-        stateOfOrigin: formData.state,
-        localGovt: formData.lga,
-        faceRecognitionLabel: formData.faceRecognitionLabel,
-        capturedImages: [capturedImage, ...formData.capturedImages],
+
+      // Prepare user data to be sent to createUserAccount
+      const userData = {
+        email: formData.email,
+        password: formData.password,
+        username: formData.userName,
+        // faceData: capturedImage,
+        // Add other user data as needed
       };
 
-      console.log("img", capturedImage);
-      console.log(formData);
-      console.log(updatedFormData);
-
       try {
-       
-        const response = await axios.post(
-          "https://voteelect.onrender.com/api/v1/register",
-          updatedFormData
-        );
-        console.log("Response:", response.data);
+        // Call createUserAccount to create a user account
+        await createUserAccount(userData);
+        console.log(userData);
 
+        if (!userData) {
+          console.log("sign up failed");
+        }
+
+        // const session = await signInAccount();
+
+        // Navigate to the signin page after successful account creation
         navigate("/signin");
       } catch (error) {
+        // Handle error if account creation fails
+        setError("Error creating user account. Please try again.");
         console.error("Error:", error);
       }
     }
@@ -164,8 +228,8 @@ const SignUp = () => {
           </div>
         </div>
         <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-          <div className="flex items-center gap-4 justify-center">
-            <div className="flex item-center gap-4 flex-col mt-9">
+          <div className="flex items-center justify-center gap-4">
+            <div className="flex flex-col gap-4 item-center mt-9">
               <WebcamCapture onCapture={handleCaptureImage} />
 
               <button
@@ -211,13 +275,13 @@ const SignUp = () => {
 
         <div className="flex flex-col gap-2">
           <label htmlFor="other-name" className="font-bold">
-            Middle Name<span>*</span>
+            Email<span>*</span>
           </label>
           <input
             onChange={handleInputChange}
             id="other-name"
-            name="middleName"
-            value={formData.middleName}
+            name="email"
+            value={formData.email}
             type="text"
             className="w-[400px] max-[500px]:w-full border border-green-300 px-2 py-[1px] font-semibold outline-none rounded-md focus:border-green-700 focus:border-2"
           />
@@ -242,10 +306,11 @@ const SignUp = () => {
           </label>
           <input
             id="face-id"
-            name="faceRecognitionLabel"
-            value={formData.faceRecognitionLabel}
-            disabled
-            className="w-[400px] cursor-not-allowed max-[500px]:w-full border border-green-300 px-2 py-[1px] font-semibold outline-none rounded-md focus:border-green-700 focus:border-2"
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
+            // disabled
+            className="w-[400px] max-[500px]:w-full border border-green-300 px-2 py-[1px] font-semibold outline-none rounded-md focus:border-green-700 focus:border-2"
           />
         </div>
 
@@ -295,7 +360,7 @@ const SignUp = () => {
             <option>Select</option>
             {lgas}
           </select>
-          {error && <span className="text-red-500 italic">{error}</span>}
+          {error && <span className="italic text-red-500">{error}</span>}
         </div>
 
         <button
@@ -305,10 +370,10 @@ const SignUp = () => {
           Sign Up
         </button>
       </form>
-      <img className="h-5 fixed left-10" src={flag} alt="flag" />
-      <img className="h-5 fixed left-10 bottom-8" src={flag} alt="flag" />
-      <img className="h-5 fixed right-10" src={flag} alt="flag" />
-      <img className="h-5 fixed right-10 bottom-8" src={flag} alt="flag" />
+      <img className="fixed h-5 left-10" src={flag} alt="flag" />
+      <img className="fixed h-5 left-10 bottom-8" src={flag} alt="flag" />
+      <img className="fixed h-5 right-10" src={flag} alt="flag" />
+      <img className="fixed h-5 right-10 bottom-8" src={flag} alt="flag" />
     </div>
   );
 };
