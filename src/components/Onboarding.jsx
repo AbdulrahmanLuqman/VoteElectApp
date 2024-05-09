@@ -11,46 +11,43 @@ const Onboarding = () => {
       image: "/flower1.jpg",
       content: (
         <>
-          <div className="h1">LOGO</div>
+          <h1 className="font-black text-2xl text-green-500">VoteElect</h1>
         </>
       ),
     },
     {
       image: "/flower2.jpg",
       content: (
-        <>
-          <h1>Cast your Votes</h1>
-          <p>
+        <div className="flex flex-col items-center">
+          <h1 className="text-[1.5rem] font-semibold">Cast your Votes</h1>
+          <p className="w-[80%] text-center">
             Experience your right as a citizen and vote for the candidate of
             your choice
           </p>
-        </>
+        </div>
       ),
     },
     {
       image: "/flower3.jpg",
       content: (
-        <>
-          <h1>Get or link your PVC</h1>
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima,
-            tempora!
+        <div className="flex flex-col items-center">
+          <h1 className="text-[1.5rem] font-semibold">Get or link your PVC</h1>
+          <p className="w-[80%]] text-center">
+            Apply to get a new voter's card and get it at your location or link
+            using your already exising card
           </p>
-        </>
+        </div>
       ),
     },
     {
       image: "/football4.jpg",
       content: (
-        <>
-          <div>
-            <h1>Monitor the Process</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Laboriosam, soluta?
+          <div className="flex flex-col items-center">
+            <h1 className="text-[1.5rem] font-semibold">Monitor the Process</h1>
+            <p className="w-[80%] text-center">
+              Keep close watch of the electoral process from START to FINISH
             </p>
           </div>
-        </>
       ),
     },
     {
@@ -59,10 +56,9 @@ const Onboarding = () => {
         <>
           <div className="flex flex-col items-center px-8">
             <div className="mb-4 flex flex-col items-center">
-              <h1 className=" font-bold text-2xl">See live Election results</h1>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Laboriosam, soluta?
+              <h1 className="text-[1.5rem] font-semibold">See live Election results</h1>
+              <p className="w-[80%] text-center">
+                Instantly see the winner of the election as soon as the election ends
               </p>
             </div>
             <div className="w-full mt-8 flex flex-col items-center">

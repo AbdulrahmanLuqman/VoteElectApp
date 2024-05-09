@@ -30,10 +30,10 @@ const SignIn = () => {
 
     try {
       // Call signInAccount function to sign in user
-      const session = await signInAccount(formData);
+      const signInSession = await signInAccount(formData);
 
       // Redirect user to dashboard upon successful sign-in
-      if (session) {
+      if (signInSession) {
         navigate("/home");
       } else {
         setError("Sign-in failed. Please check your credentials.");

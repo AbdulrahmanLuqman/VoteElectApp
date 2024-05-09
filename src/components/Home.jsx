@@ -54,8 +54,15 @@ const Home = () => {
       </div>
       <div className="w-[90%] bg-white text-center p-4 rounded-md shadow-md mx-auto relative bottom-8">
         <p className="text-[1.1rem] font-semibold">
-          See <Link className="text-green-500">Ongoing</Link> or{" "}
-          <Link className="text-green-500">Upcoming</Link> Election
+          See{" "}
+          <Link to="/vote" className="text-green-500">
+            Ongoing
+          </Link>{" "}
+          or{" "}
+          <Link to="/vote" className="text-green-500">
+            Upcoming
+          </Link>{" "}
+          Election
         </p>
       </div>
       <div className="w-[90%] bg-white p-4 rounded-md shadow-md mx-auto">

@@ -7,6 +7,9 @@ import WebcamCapture from "./components/WebcamCapture";
 import Notify from "./components/Notifications";
 import Vote from "./components/Vote";
 import Profile from "./components/Profile";
+import Candidate from "./components/CandidateBox/Candidate";
+import StepForm from "./components/Vin/StepForm";
+import Biometrics from "./components/Vin/Biometrics";
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
       <Route path="/home" element={<Home />} />
       <Route path="/webcam-capture" element={<WebcamCapture />} />
       <Route path="/notifications" element={<Notify />} />
+      <Route path="/candidate" element={<Candidate />} />
+      <Route path="/stepForm" element={<StepForm />} />
+      <Route path="/biometrics" element={<Biometrics />} />
       <Route path="/vote" element={<Vote />} />
       <Route path="/profile" element={<Profile />} />
     </Routes>
