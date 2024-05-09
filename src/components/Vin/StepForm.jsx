@@ -17,8 +17,9 @@ const StepForm = () => {
 
   return (
     <div className="max-w-md mx-4 md:mx-auto py-4">
-      <h1 className="text-black font-semibold text-xl gap-4 mb-6 flex flex-col">
-        <FaArrowLeft className="" /> Vote for Presidency
+      <h1 className="text-black  font-semibold text-xl gap-4 mb-6 flex ">
+        <FaArrowLeft className="" /> 
+        <p>Vote for Presidency</p>
       </h1>
       <div className="mx-4 flex justify-between items-center mb-4">
         <div className="flex flex-col items-center">
@@ -29,7 +30,7 @@ const StepForm = () => {
           >
             1
           </div>
-          <div className="text-xs font-medium text-gray-600 mt-1">
+          <div className="text-xs text-center font-medium text-gray-600 mt-1">
             Verify ID
           </div>
         </div>
@@ -63,7 +64,7 @@ const StepForm = () => {
           >
             3
           </div>
-          <div className="text-xs font-medium text-gray-600 mt-1">
+          <div className="text-xs text-center font-medium text-gray-600 mt-1">
             Confirm Vote
           </div>
         </div>

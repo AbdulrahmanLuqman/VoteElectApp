@@ -16,16 +16,16 @@ const Tab = () => {
         {/* <Vote /> */}
       <div className="flex justify-between items-center overflow-x-auto">
         <button
-          className={`px-4 py-2 font-semibold text-lg ${
-            activeTab === 1 ? "border-b-4 border-green-700 border-3 font-bold" : ""
+          className={`px-4 py-2 font-semibold ${
+            activeTab === 1 ? "text-green-500 border-b-4 border-green-500 border-3 font-bold" : "text-gray-400"
           }`}
           onClick={() => handleTabClick(1)}
         >
           Ongoing elections
         </button>
         <button
-          className={`px-4 py-2 font-semibold text-lg ${
-            activeTab === 2 ? "border-b-4 border-green-700 border-3 font-bold" : ""
+          className={`px-4 py-2 font-semibold ${
+            activeTab === 2 ? "text-green-500 border-b-4 border-green-500 border-3 font-bold" : "text-gray-400"
           }`}
           onClick={() => handleTabClick(2)}
         >

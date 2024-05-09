@@ -13,7 +13,7 @@ const Candidate = () => {
       title: "Aminat Danjuma",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       profileLink: "/profile1",
-      voteLink: "/vote1",
+      voteLink: "/stepform",
     },
     {
       id: 2,
@@ -22,7 +22,7 @@ const Candidate = () => {
       title: "Ebuka David",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       profileLink: "/profile2",
-      voteLink: "/vote2",
+      voteLink: "/stepform",
     },
     {
       id: 3,
@@ -31,7 +31,7 @@ const Candidate = () => {
       title: "Oyemade Emmanuel",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       profileLink: "/profile3",
-      voteLink: "/vote3",
+      voteLink: "/stepform",
     },
     {
       id: 4,
@@ -40,7 +40,7 @@ const Candidate = () => {
       title: "Ode Tola",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       profileLink: "/profile4",
-      voteLink: "/vote4",
+      voteLink: "/stepform",
     },
     {
       id: 5,
@@ -49,7 +49,7 @@ const Candidate = () => {
       title: "oye Wusi",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       profileLink: "/profile5",
-      voteLink: "/vote5",
+      voteLink: "/stepform",
     },
     {
       id: 6,
@@ -58,7 +58,7 @@ const Candidate = () => {
       title: "Abisogun Daniel",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       profileLink: "/profile6",
-      voteLink: "/vote6",
+      voteLink: "/stepform",
     },
   ];
 

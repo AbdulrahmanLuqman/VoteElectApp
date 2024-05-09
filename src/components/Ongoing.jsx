@@ -1,8 +1,10 @@
 import React from 'react'
 import { FaArrowRight } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const OngoningElect = () => {
   return (
+    <Link to="/candidate">
       <div className="max-w-[620px] mt-6 overflow-hidden border-gray-3 rounded-xl border-2 border-gray-300 border-solid ">
       <div className="px-6 py-8">
         <h1 className="font-bold text-2xl mb-4">President Candidates</h1>
@@ -30,10 +32,12 @@ const OngoningElect = () => {
             alt="Contact"
             />
             </div>
-            <FaArrowRight className='text-2xl text-green-700'/>
+            <Link to="/candidate"><FaArrowRight className='text-2xl text-green-500'/></Link>
+            
         </div>
       </div>
     </div>
+    </Link>
   );
 }
 

@@ -21,9 +21,9 @@ function App() {
       <Route path="/home" element={<Home />} />
       <Route path="/webcam-capture" element={<WebcamCapture />} />
       <Route path="/notifications" element={<Notify />} />
-      <Route path="/Candidate" element={<Candidate />} />
-      <Route path="/StepForm" element={<StepForm />} />
-      <Route path="/Biometrics" element={<Biometrics />} />
+      <Route path="/candidate" element={<Candidate />} />
+      <Route path="/stepForm" element={<StepForm />} />
+      <Route path="/biometrics" element={<Biometrics />} />
       <Route path="/vote" element={<Vote />} />
       <Route path="/profile" element={<Profile />} />
     </Routes>
