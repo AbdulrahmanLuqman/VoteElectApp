@@ -1,4 +1,4 @@
-// Biometrics.js
+
 import React, { useState } from "react";
 import { FaUserLock } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
