@@ -26,12 +26,12 @@ const Card = ({ logo, picture, title, description, profileLink, voteLink }) => {
       <div className="flex gap-4 px-4  mb-8">
         <a
           href={profileLink}
-          className="flex-1 bg-white border text-center border-green-500 hover:bg-green-500 hover:text-white font-semibold py-2 px-2 rounded-lg"
+          className="w-[50%] bg-white border text-center border-green-500 hover:bg-green-500 hover:text-white font-semibold py-2 px-2 rounded-lg"
         >
           See Profile
         </a>
         <Link to="/stepform"
-          className="flex-1 bg-green-500 text-center hover:bg-green-600 text-white font-semibold py-2 px-2 rounded-lg"
+          className="w-[50%] bg-green-500 text-center hover:bg-green-600 text-white font-semibold py-2 px-2 rounded-lg"
         >
           Vote
         </Link>
