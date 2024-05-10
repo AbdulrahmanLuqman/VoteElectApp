@@ -10,7 +10,7 @@ const BottomNavLinks = () =>{
     // var 
 
     return(
-        <div className="bg-white fixed bottom-0 w-full flex justify-between px-10 py-2">
+        <div className="max-w-md  bg-white fixed bottom-0 w-full flex justify-between px-10 py-2">
             <button>
                 <Link to="/home" className="flex flex-col items-center">
                     <FaHome  className={location.pathname === "/home" ? "text-green-600" : "text-black"}/>

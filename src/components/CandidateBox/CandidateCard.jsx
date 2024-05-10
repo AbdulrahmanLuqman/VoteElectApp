@@ -2,7 +2,7 @@ import React from "react";
 
 const Card = ({ logo, picture, title, description, profileLink, voteLink }) => {
   return (
-    <div className="w-[22.5rem] my-10 border-green-300 border rounded-2xl overflow-hidden">
+    <div className="max-w-md mx-auto my-10 border-green-300 border rounded-2xl overflow-hidden">
       <div className="relative">
         <div className="absolute top-0 right-4 flex justify-center items-center w-12 h-10">
           <img className="w-fit object-cover" src={logo} alt="logo" />

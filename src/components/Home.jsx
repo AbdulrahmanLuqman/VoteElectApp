@@ -11,7 +11,7 @@ const Home = () => {
   //     // id:1,fullName:""
   // }]
   return (
-    <div className=" bg-green-100 h-screen ">
+    <div className="max-w-md mx-auto bg-green-100 h-screen ">
       {/* TOP */}
       <div className=" flex items-center justify-between py-6  px-4">
         <div className=" flex gap-4 ">

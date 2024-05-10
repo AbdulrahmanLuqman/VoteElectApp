@@ -12,7 +12,7 @@ import { FaSignOutAlt } from "react-icons/fa";
 const Profile = ()=> {
 
     return(
-        <div>
+        <div className="max-w-md mx-auto">
             <h1 className="text-[1.5rem] font-semibold m-2">Profile</h1>
             <div className="m-4 flex justify-between items-center">
                 <div className="flex items-center gap-4">

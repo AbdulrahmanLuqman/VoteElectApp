@@ -63,7 +63,7 @@ const Candidate = () => {
   ];
 
   return (
-    <div className="mx-4 my-6">
+    <div className="max-w-md mx-auto mx-4 my-6">
         <FaArrowLeft className="mb-8"/>
       <div className="flex items-center gap-2 w-full py-4 bg-gray-200 rounded-lg border-2 border-solid pl-4 border-gray-300 ">
         <FaSearch className="text-gray-400 text-xl" />

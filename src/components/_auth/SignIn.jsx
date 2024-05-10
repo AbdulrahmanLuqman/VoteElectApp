@@ -18,31 +18,35 @@ const SignIn = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(""); // Reset error state
+  const handleSubmit = ()=>{
+    navigate("/home")
+  }
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setError(""); // Reset error state
 
     // Validate form fields
-    if (!formData.email.trim() || !formData.faceRecognitionId.trim()) {
-      setError("All fields are required");
-      return;
-    }
+    // if (!formData.email.trim() || !formData.faceRecognitionId.trim()) {
+    //   setError("All fields are required");
+    //   return;
+    // }
 
-    try {
+    // try {
       // Call signInAccount function to sign in user
-      const session = await signInAccount(formData);
+      // const session = await signInAccount(formData);
 
       // Redirect user to dashboard upon successful sign-in
-      if (session) {
-        navigate("/home");
-      } else {
-        setError("Sign-in failed. Please check your credentials.");
-      }
-    } catch (error) {
-      console.error("Error signing in:", error);
-      setError("Error signing in. Please try again.");
-    }
-  };
+  //     if (session) {
+  //       navigate("/home");
+  //     } else {
+  //       setError("Sign-in failed. Please check your credentials.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error signing in:", error);
+  //     setError("Error signing in. Please try again.");
+  //   }
+  // };
 
   return (
     <div className="flex justify-center w-full px-10 py-4">
