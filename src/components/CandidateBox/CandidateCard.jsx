@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Card = ({ logo, picture, title, description, profileLink, voteLink }) => {
   return (
@@ -29,12 +30,14 @@ const Card = ({ logo, picture, title, description, profileLink, voteLink }) => {
         >
           See Profile
         </a>
+        <Link to="/stepform">
         <a
           href={voteLink}
           className="flex-1 bg-green-500 text-center hover:bg-green-600 text-white font-semibold py-2 px-2 rounded-lg"
         >
           Vote
         </a>
+        </Link>
       </div>
     </div>
   );
